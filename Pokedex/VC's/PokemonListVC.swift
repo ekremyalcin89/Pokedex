@@ -11,15 +11,15 @@ private let reuseIdentifier = "PokedexCell"
 
 class PokedexController: UICollectionViewController {
     
-    // MARK: - Properties
+ 
     
     var pokemon = [Pokemon]()
     var filteredPokemon = [Pokemon]()
     var inSearchMode = false
     var searchBar: UISearchBar!
     
-    let infoView: InfoView = {
-        let view = InfoView()
+    let infoView: PokeInfoView = {
+        let view = PokeInfoView()
         view.layer.cornerRadius = 5
         return view
     }()
@@ -30,7 +30,7 @@ class PokedexController: UICollectionViewController {
         return view
     }()
     
-    // MARK: - Init
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,7 @@ class PokedexController: UICollectionViewController {
         
     }
     
-    //MARK: - Selectors
+ 
     
     @objc func showSearchBar() {
         configureSearchBar(shouldShow: true)
@@ -50,7 +50,7 @@ class PokedexController: UICollectionViewController {
         dismissInfoView(pokemon: nil)
     }
     
-    // MARK: - API
+    // API Here
     
     func fetchPokemon() {
         Service.instance.fetchPokemon { (pokemon) in
@@ -60,14 +60,7 @@ class PokedexController: UICollectionViewController {
             }
         }
     }
-    
-    // MARK: - Helper functions
-    
-    func showPokemonInfoController(withPokemon pokemon: Pokemon) {
-        let controller = PokemonInfoController()
-        controller.pokemon = pokemon
-        self.navigationController?.pushViewController(controller, animated: true)
-    }
+  
     
     func configureSearchBarButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showSearchBar))
@@ -108,7 +101,7 @@ class PokedexController: UICollectionViewController {
             self.infoView.removeFromSuperview()
             self.navigationItem.rightBarButtonItem?.isEnabled = true
             guard let pokemon = pokemon else { return }
-            self.showPokemonInfoController(withPokemon: pokemon)
+          
             
         }
     }
@@ -130,15 +123,14 @@ class PokedexController: UICollectionViewController {
         visualEffectView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         visualEffectView.alpha = 0
         
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(handleDismissal))
-        visualEffectView.addGestureRecognizer(gesture)
+        
         
     }
     
 }
 
 
-// MARK: - UISearchBarDelegate
+// SearchBarDelegate
 extension PokedexController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -196,8 +188,6 @@ extension PokedexController {
             
         }
 
-        showPokemonInfoController(withPokemon: poke)
-        
     }
 }
 

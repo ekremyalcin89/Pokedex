@@ -9,7 +9,7 @@ import UIKit
 
 class PokemonInfoController: UIViewController {
     
-    // MARK: Properties
+   
     
     var pokemon: Pokemon? {
         didSet {
@@ -42,8 +42,8 @@ class PokemonInfoController: UIViewController {
         return label
     }()
     
-    let infoView: InfoView = {
-        let view = InfoView()
+    let infoView: PokeInfoView = {
+        let view = PokeInfoView()
         view.configureViewForInfoController()
         return view
     }()
@@ -80,7 +80,7 @@ class PokemonInfoController: UIViewController {
         return iv
     }()
     
-    // MARK: Init
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,7 +88,7 @@ class PokemonInfoController: UIViewController {
     }
     
     
-    // MARK - Helper functions
+    //   Configures
     func configureViewComponents() {
         view.backgroundColor = .white
         navigationController?.navigationBar.tintColor = .white

@@ -11,9 +11,7 @@ protocol infoViewDelegate {
     func dismissInfoView(withPokemon pokemon: Pokemon?)
 }
 
-class InfoView: UIView {
-    
-    // MARK: - Properties
+class PokeInfoView: UIView {
     
     var delegate: infoViewDelegate?
     var configureForInfoController = false
@@ -113,19 +111,8 @@ class InfoView: UIView {
         return label
     }()
     
-    let infoButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.backgroundColor = .PokeRed()
-        button.setTitle("View More Info", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        button.addTarget(self, action: #selector(handleViewMoreInfo), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 5
-        return button
-    }()
-    
-    // MARK: - Init
+  
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -133,17 +120,15 @@ class InfoView: UIView {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError("init not implemented")
     }
-    
-    // MARK: - Selectors
+ 
     
     @objc func handleViewMoreInfo() {
         guard let pokemon = self.pokemon else { return }
         self.delegate?.dismissInfoView(withPokemon: pokemon)
     }
-    
-    // MARK: - Helper functions
+
     
     func configureLabel(label: UILabel, title: String, details: String) {
         let attributedText = NSMutableAttributedString(attributedString: NSAttributedString(string: "\(title):  ", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.PokeRed()]))
@@ -214,8 +199,7 @@ class InfoView: UIView {
         addSubview(attackLabel)
         attackLabel.anchor(top: pokedexIdLabel.bottomAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
         
-        addSubview(infoButton)
-        infoButton.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 12, paddingRight: 12, width: 0, height: 50)
+      
     }
     
 }

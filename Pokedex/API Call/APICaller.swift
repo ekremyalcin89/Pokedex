@@ -12,7 +12,7 @@ import UIKit
 class Service {
     
     static let instance = Service()
-    let BASE_URL = "https://pokedex-bb36f.firebaseio.com/pokemon.json"
+    let BASE_URL = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=40"
     
     func fetchPokemon(completion: @escaping ([Pokemon]) -> ()) {
         
