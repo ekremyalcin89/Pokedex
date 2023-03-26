@@ -46,7 +46,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemRed
         
-        // Creates pokemon type and ability string
+        //  type and ability string
         let typeString = listPokemonTypeDetails(types: pokemonTypeDescription)
         let abilityString = listPokemonAbilityDetails(abilities: pokemonAbilitiesDescription)
         
@@ -65,7 +65,7 @@ class DetailViewController: UIViewController {
 
 }
 
-// MARK: Network call and image parse for Pokemon Sprite
+// call and image parse 
 
 extension DetailViewController {
     
@@ -87,14 +87,14 @@ extension DetailViewController {
             fatalError("Could not load urlString")
         }
         
-        // Convert data to image
+     
         let getDataTask = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil else {
                 return
             }
             
             DispatchQueue.main.async {
-                // Set image to image View
+            
                 let imageData = UIImage(data: data)!
                 self.spriteImageView?.image = imageData
             }
@@ -114,33 +114,23 @@ extension DetailViewController {
     func listPokemonTypeDetails(types: [type]) -> String {
         var returnString = ""
         
-        // iterated through array and appends each type to a string separated by a ' , '
-        // capitalizing the first letter of each type
+        
         for type in types {
             returnString = returnString + type.type.name.capitalizingFirstLetter() + ", "
         }
         
-        // removes the comma and space at the end of the string
-        returnString.removeLast()
-        returnString.removeLast()
-        
-        return returnString
+      
     }
     
     func listPokemonAbilityDetails(abilities: [Ability]) -> String {
         var returnString = ""
         
-        // iterated through array and appends each ability to a string separated by a ' , '
-        // capitalizing the first letter of each type
+       
         for ability in abilities {
             returnString = returnString + ability.ability.name.capitalizingFirstLetter() + ", "
         }
         
-        // removes the comma and space at the end of the string
-        returnString.removeLast()
-        returnString.removeLast()
-        
-        return returnString
+       
     }
 }
 
