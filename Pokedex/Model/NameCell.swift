@@ -15,7 +15,7 @@ class NameCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var sprite: UIImageView!
     
-    // Stops images changing in view.  Not perfect but it stops the wrong image being displayed.
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         nameLabel.text = ""
@@ -44,7 +44,7 @@ class NameCell: UITableViewCell {
                 return
             }
             
-            // Makes it run on the background thread to that the app dosent stutter when scrolling
+            // Background run  thread to  the app dosent crash when scrolling
             DispatchQueue.main.async {
                 let imageData = UIImage(data: data)!
                 self.sprite.image = imageData
