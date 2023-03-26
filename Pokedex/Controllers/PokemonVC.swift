@@ -14,7 +14,7 @@ class TableViewController: UITableViewController {
     var pokemon:                    [Result] = []
     var sprite:                     Sprite?
     
-    // Holds list of sprite URLs to be passed to the nameCell class
+    
     var spriteURLList:              [String] = []
     var sprites:                    [UIImage] = []
     var count =                     0
@@ -22,7 +22,7 @@ class TableViewController: UITableViewController {
     var nameURL:                    String?
     var imageURL:                   String?
     
-    // Cell tapped data
+   
     var pokemonNumber:              Int?
     var pokemonBaseExp:             Int?
     var pokemonType:                [type] = []
@@ -43,14 +43,14 @@ class TableViewController: UITableViewController {
 
     }
     
-    // loops through grabbing pokemon name data
+    // loops  name data
     func loadNameData() {
-        // loop runs 55 times as there is 20 Pokemon per page and 1118 Pokemon in total
+        
         for _ in 0...55 {
             nameURL = "https://pokeapi.co/api/v2/pokemon?limit=40&offset=0"
             count += 20
             
-            // This is the actual network call which collects the data
+            
             if let url = URL(string: nameURL!) {
                 if let data = try? Data(contentsOf: url) {
                     parse(json: data)
@@ -59,9 +59,7 @@ class TableViewController: UITableViewController {
         }
     }
     
-    // Loops through appending the image png URL to spriteURLList array.
-    // This is so each url can be passed to NameCell class in order for it
-    // to parse the image JSON.
+    
     func loadImageURL() {
         var spriteIndex = 0
         for index in 1...1118 {
@@ -72,7 +70,7 @@ class TableViewController: UITableViewController {
         }
     }
     
-    // Parses the name JSON and appends it to the Pokemon Array
+    
     func parse(json: Data) {
         let decoder = JSONDecoder()
         
@@ -117,7 +115,7 @@ class TableViewController: UITableViewController {
     }
     
     func cellToBePassedTappedData(pokeURL: String) {
-        // This is the actual network call which collects the data
+       
         if let url = URL(string: pokeURL) {
             if let data = try? Data(contentsOf: url) {
                 
@@ -129,9 +127,7 @@ class TableViewController: UITableViewController {
     func parsePokemonData(json: Data) {
         let decoder = JSONDecoder()
         
-        // this is where I got stuck.  The data for the pokemon abilities and type is nested JSON and
-        // i have never had to parse this before and I have run out of time, but i know that this is the
-        // problem.
+       
         
         if let jsonResults = try? decoder.decode(Abilities.self, from: json) {
             pokemonBaseExp = jsonResults.base_experience
